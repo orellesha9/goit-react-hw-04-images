@@ -2,6 +2,7 @@ import { Component } from 'react';
 import styles from './post.module.css';
 import { getAllPosts } from 'api/post';
 import PostSearchForm from 'components/Searchbar/PostSearchForm/PostSearchForm';
+import ImageGallery from 'components/ImageGallery/ImageGallery';
 
 class Post extends Component {
   state = {
@@ -58,7 +59,7 @@ class Post extends Component {
         {error && <p className={styles.error}>{error}</p>}
         {loading && <p>...Loading</p>}
         {Boolean(elements.length) && (
-          <ul className={styles.ImageGallery}>{elements}</ul>
+          <ImageGallery className={styles.ImageGallery}>{elements}</ImageGallery>
         )}
         ;
       </>

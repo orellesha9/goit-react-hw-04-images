@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import styles from './searchbar.module.css';
-import { getAllPosts } from 'api/post';
 import PostSearchForm from './PostSearchForm/PostSearchForm';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import { searchPosts } from 'api/post';
@@ -81,9 +80,7 @@ class Searchbar extends Component {
       <>
         <PostSearchForm onSubmit={handleSearch} />
         {error && <p className={styles.error}>{error}</p>}
-        {loading && (
-          <Loader/>
-        )}
+        {loading && <Loader />}
         {isPost && <ImageGalleryItem showModal={showModal} items={posts} />}
         {isPost && (
           <Button onClick={loadMore} type="button">

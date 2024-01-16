@@ -1,4 +1,5 @@
 import styles from './imagegalleryItem.module.css';
+import ImageGallery from 'components/ImageGallery/ImageGallery';
 
 const ImageGalleryItem = ({showModal, items }) => {
   const elements = items.map(({ id, webformatURL, largeImageURL }) => (
@@ -10,7 +11,7 @@ const ImageGalleryItem = ({showModal, items }) => {
       />
     </li>
   ));
-  return <ul className={styles.ImageGallery}>{elements}</ul>;
+  return <ImageGallery className={styles.ImageGallery}>{elements}</ImageGallery>;
 };
 
 

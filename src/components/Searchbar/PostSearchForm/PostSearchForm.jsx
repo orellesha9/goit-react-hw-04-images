@@ -26,23 +26,22 @@ class PostSearchForm extends Component {
     const { search } = this.state;
 
     return (
-        <header class={styles.Searchbar}>
-      <form onSubmit={handleSubmit} className={styles.SearchForm}>
-        <button type="submit" className={styles.SearchForm_button_label}>
-          <span className={styles.SearchForm_button_label}>Search</span>
-        </button>
+      <header class={styles.Searchbar}>
+        <form onSubmit={handleSubmit} className={styles.SearchForm}>
+          <button type="submit" className={styles.SearchForm_button}>
+            <span className={styles.SearchForm_button_label}></span>
+          </button>
 
-        <input
-          name="search"
-          value={search}
-          onChange={handleChange}
-          className={styles.SearchForm_input}
-          type="text"
- 
-          required
-          placeholder="Search images and photos"
-        />
-      </form>
+          <input
+            name="search"
+            value={search}
+            onChange={handleChange}
+            className={styles.SearchForm_input}
+            type="text"
+            required
+            placeholder="Search images and photos"
+          />
+        </form>
       </header>
     );
   }
