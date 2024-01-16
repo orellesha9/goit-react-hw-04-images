@@ -1,6 +1,6 @@
-import styles from './imagegallery.module.css';
+import styles from './imagegalleryItem.module.css';
 
-const ImageGallery = ({showModal, items }) => {
+const ImageGalleryItem = ({showModal, items }) => {
   const elements = items.map(({ id, webformatURL, largeImageURL }) => (
     <li key={id} onClick={()=> showModal({webformatURL, largeImageURL})} className={styles.ImageGalleryItem}>
       <img
@@ -14,4 +14,4 @@ const ImageGallery = ({showModal, items }) => {
 };
 
 
-export default ImageGallery;
+export default ImageGalleryItem;

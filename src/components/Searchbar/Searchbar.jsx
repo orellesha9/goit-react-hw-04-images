@@ -2,10 +2,11 @@ import { Component } from 'react';
 import styles from './searchbar.module.css';
 import { getAllPosts } from 'api/post';
 import PostSearchForm from './PostSearchForm/PostSearchForm';
-import ImageGallery from './ImageGallery/ImageGallery';
+import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import { searchPosts } from 'api/post';
 import Button from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
+import { Audio } from 'react-loader-spinner';
 
 class Searchbar extends Component {
   state = {
@@ -56,11 +57,11 @@ class Searchbar extends Component {
   };
 
   closeModal = () => {
-    this.setState ({
-        modalOpen:false,
-        postDetails:{}
-    })
-  }
+    this.setState({
+      modalOpen: false,
+      postDetails: {},
+    });
+  };
 
   handleSearch = ({ search }) => {
     this.setState({
@@ -80,8 +81,18 @@ class Searchbar extends Component {
       <>
         <PostSearchForm onSubmit={handleSearch} />
         {error && <p className={styles.error}>{error}</p>}
-        {loading && <p>...Loading</p>}
-        {isPost && <ImageGallery showModal={showModal} items={posts} />}
+        {loading && (
+          <Audio
+            height="100"
+            width="100"
+            color="#4fa94d"
+            ariaLabel="audio-loading"
+            wrapperStyle={{}}
+            wrapperClass="wrapper-class"
+            visible={true}
+          />
+        )}
+        {isPost && <ImageGalleryItem showModal={showModal} items={posts} />}
         {isPost && (
           <Button onClick={loadMore} type="button">
             Load more
