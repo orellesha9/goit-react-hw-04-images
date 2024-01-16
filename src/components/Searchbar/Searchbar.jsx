@@ -36,7 +36,7 @@ class Searchbar extends Component {
         posts: data.hits?.length ? [...posts, ...data.hits] : posts,
       }));
     } catch (error) {
-      this.setState({ error: error.messege });
+      this.setState({ error: error.message });
     } finally {
       this.setState({
         loading: false,
