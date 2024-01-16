@@ -6,7 +6,7 @@ import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import { searchPosts } from 'api/post';
 import Button from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
-import { Audio } from 'react-loader-spinner';
+import Loader from 'components/Loader/Loader';
 
 class Searchbar extends Component {
   state = {
@@ -82,15 +82,7 @@ class Searchbar extends Component {
         <PostSearchForm onSubmit={handleSearch} />
         {error && <p className={styles.error}>{error}</p>}
         {loading && (
-          <Audio
-            height="100"
-            width="100"
-            color="#4fa94d"
-            ariaLabel="audio-loading"
-            wrapperStyle={{}}
-            wrapperClass="wrapper-class"
-            visible={true}
-          />
+          <Loader/>
         )}
         {isPost && <ImageGalleryItem showModal={showModal} items={posts} />}
         {isPost && (
