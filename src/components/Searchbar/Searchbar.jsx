@@ -89,7 +89,7 @@ class Searchbar extends Component {
         )}
         {modalOpen && (
           <Modal close={this.closeModal}>
-            <img src={postDetails.largeImageURL} />
+            <img src={postDetails.largeImageURL} alt='text' />
           </Modal>
         )}
       </>
