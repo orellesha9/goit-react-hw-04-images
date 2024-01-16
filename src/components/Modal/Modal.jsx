@@ -9,11 +9,8 @@ class Modal extends Component {
     document.addEventListener('keydown', this.closeModal);
   }
 
-
-
-
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.closeModal)
+    document.removeEventListener('keydown', this.closeModal);
   }
   closeModal = ({ target, currentTarget, code }) => {
     if (target === currentTarget || code === 'Escape') {
@@ -22,7 +19,7 @@ class Modal extends Component {
   };
   render() {
     const { closeModal } = this;
-    const { children, close } = this.props;
+    const { children } = this.props;
     return createPortal(
       <div onClick={closeModal} className={styles.Overlay}>
         <div className={styles.Modal}>
