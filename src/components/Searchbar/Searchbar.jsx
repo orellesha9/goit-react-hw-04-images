@@ -16,6 +16,7 @@ class Searchbar extends Component {
     page: 1,
     modalOpen: false,
     postDetails: {},
+    totalHits: 0,
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -34,6 +35,7 @@ class Searchbar extends Component {
       const { data } = await searchPosts(search, page);
       this.setState(({ posts }) => ({
         posts: data.hits?.length ? [...posts, ...data.hits] : posts,
+        totalHits: data.totalHits,
       }));
     } catch (error) {
       this.setState({ error: error.message });
@@ -72,24 +74,24 @@ class Searchbar extends Component {
 
   render() {
     const { handleSearch, loadMore, showModal } = this;
-    const { posts, loading, error, modalOpen, postDetails } = this.state;
+    const { posts, loading, error, modalOpen, postDetails, totalHits } =
+      this.state;
 
     const isPost = Boolean(posts.length);
-
     return (
       <>
         <PostSearchForm onSubmit={handleSearch} />
         {error && <p className={styles.error}>{error}</p>}
         {loading && <Loader />}
         {isPost && <ImageGalleryItem showModal={showModal} items={posts} />}
-        {isPost && (
+        {isPost && posts.length < totalHits ? (
           <Button onClick={loadMore} type="button">
             Load more
           </Button>
-        )}
+        ) : null}
         {modalOpen && (
           <Modal close={this.closeModal}>
-            <img src={postDetails.largeImageURL} alt='text' />
+            <img src={postDetails.largeImageURL} alt="text" />
           </Modal>
         )}
       </>
