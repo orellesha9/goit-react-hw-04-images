@@ -1,4 +1,4 @@
-import { Component, useEffect } from 'react';
+import {  useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './modal.module.css';
 
@@ -14,7 +14,7 @@ const Modal = ({ close, children }) => {
   useEffect(() => {
     document.addEventListener('keydown', closeModal);
     return() => document.removeEventListener('keydown', closeModal);
-  }, [])
+  }, []);
 
   return createPortal(
     <div onClick={closeModal} className={styles.Overlay}>
