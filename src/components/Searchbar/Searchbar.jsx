@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './searchbar.module.css';
 import PostSearchForm from './PostSearchForm/PostSearchForm';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';

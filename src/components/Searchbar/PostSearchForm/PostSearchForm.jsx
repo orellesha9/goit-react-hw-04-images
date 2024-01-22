@@ -1,4 +1,4 @@
-import { useState, useEffect,useRef,useMemo, Component } from 'react';
+import { useState, useEffect,useRef,useMemo} from 'react';
 import styles from './postsearchform.module.css';
 import { nanoid } from 'nanoid'
 
