@@ -1,4 +1,4 @@
-import { Component, useState, useEffect } from 'react';
+import {  useState, useEffect } from 'react';
 import styles from './post.module.css';
 import { getAllPosts } from 'api/post';
 import PostSearchForm from 'components/Searchbar/PostSearchForm/PostSearchForm';
