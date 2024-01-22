@@ -1,9 +1,52 @@
-import { Component } from 'react';
+import { Component, useState, useEffect } from 'react';
 import styles from './post.module.css';
 import { getAllPosts } from 'api/post';
 import PostSearchForm from 'components/Searchbar/PostSearchForm/PostSearchForm';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 
+const Post = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        const { data } = await getAllPosts();
+        setPosts(data.hits?.length ? data.hits : []);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
+
+  const elements = posts.map(({ id, webformatURL, largeImageURL }) => (
+    <li key={id} className={styles.ImageGalleryItem}>
+      <img
+        className={styles.ImageGalleryItem_image}
+        src={webformatURL}
+        alt=""
+      />
+    </li>
+  ));
+  return (
+    <>
+      <PostSearchForm />
+      {error && <p className={styles.error}>{error}</p>}
+      {loading && <p>...Loading</p>}
+      {Boolean(elements.length) && (
+        <ImageGallery className={styles.ImageGallery}>{elements}</ImageGallery>
+      )}
+      ;
+    </>
+  );
+};
+
+/*
 class Post extends Component {
   state = {
     posts: [],
@@ -66,5 +109,5 @@ class Post extends Component {
     );
   }
 }
-
+*/
 export default Post;

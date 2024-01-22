@@ -1,5 +1,6 @@
 
 import Searchbar from "./Searchbar/Searchbar";
+import Post from "./Post/Post";
 
 export const App = () => {
   return (
@@ -10,6 +11,7 @@ export const App = () => {
       paddingBottom: '24px'
     }}>
       {/* Зміст div-контейнера */}
+      {/* <Post/> */}
       <Searchbar />
     </div>
   );

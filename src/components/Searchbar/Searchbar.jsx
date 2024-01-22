@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, useEffect, useState } from 'react';
 import styles from './searchbar.module.css';
 import PostSearchForm from './PostSearchForm/PostSearchForm';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
@@ -7,6 +7,83 @@ import Button from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import Loader from 'components/Loader/Loader';
 
+const Searchbar = () => {
+  const [search, setSearch] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [postDetails, setPostDetails] = useState({});
+  const [totalHits, setTotalHits] = useState(0);
+
+  const handleSearch = ({ search }) => {
+    setSearch(search);
+    setPosts([]);
+    setPage(1);
+  };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        const { data } = await searchPosts(search, page);
+        setPosts(prevPosts =>
+          data.hits?.length ? [...prevPosts, ...data.hits] : posts
+        );
+        setTotalHits(data.totalHits)
+        // this.setState(({ posts }) => ({
+        //   posts: data.hits?.length ? [...posts, ...data.hits] : posts,
+        //   totalHits: data.totalHits,
+        // }));
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (search) {
+      fetchPosts();
+    }
+  }, [search, page]);
+
+  const loadMore = () => setPage(prevPage => prevPage + 1);
+
+  const showModal = ({ webformatURL, largeImageURL }) => {
+    setModalOpen(true);
+    setPostDetails({
+      webformatURL,
+      largeImageURL,
+    });
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setPostDetails({});
+  };
+
+  const isPost = Boolean(posts.length);
+  return (
+    <>
+      <PostSearchForm onSubmit={handleSearch} />
+      {error && <p className={styles.error}>{error}</p>}
+      {loading && <Loader />}
+      {isPost && <ImageGalleryItem showModal={showModal} items={posts} />}
+      {isPost && posts.length < totalHits ? (
+        <Button onClick={loadMore} type="button">
+          Load more
+        </Button>
+      ) : null}
+      {modalOpen && (
+        <Modal close={closeModal}>
+          <img src={postDetails.largeImageURL} alt="text" />
+        </Modal>
+      )}
+    </>
+  );
+};
+
+/*
 class Searchbar extends Component {
   state = {
     search: '',
@@ -98,5 +175,5 @@ class Searchbar extends Component {
     );
   }
 }
-
+*/
 export default Searchbar;
