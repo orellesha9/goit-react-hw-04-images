@@ -1,6 +1,5 @@
 
 import Searchbar from "./Searchbar/Searchbar";
-import Post from "./Post/Post";
 
 export const App = () => {
   return (

@@ -28,10 +28,10 @@ const Searchbar = () => {
       try {
         setLoading(true);
         const { data } = await searchPosts(search, page);
-        setPosts ((prevPosts) =>
+        setPosts(prevPosts =>
           data.hits?.length ? [...prevPosts, ...data.hits] : prevPosts
         );
-        setTotalHits(data.totalHits)
+        setTotalHits(data.totalHits);
         // this.setState(({ posts }) => ({
         //   posts: data.hits?.length ? [...posts, ...data.hits] : posts,
         //   totalHits: data.totalHits,
